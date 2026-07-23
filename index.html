@@ -1,426 +1,570 @@
 <!DOCTYPE html>
 <html lang="ku">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asîman — Bilim û Zanist</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Inter:wght@300;400;600;800&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asîman — Zanist û Xwezayî</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-:root{
-  --bg:#fdfcfb;
-  --surface:#ffffff;
-  --text:#12141d;
-  --text-dim:#5a5d72;
-  --accent:#0f3b6e;
-  --accent-warm:#c49a3a;
-  --border:#ececf2;
-}
+  <style>
+    :root {
+      --bg-deep: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-hover: #161f36;
+      --text-main: #f0ece6;
+      --text-muted: #94a3b8;
+      --gold: #d4af37;
+      --gold-soft: rgba(212,175,55,0.12);
+      --sky-soft: rgba(56,189,248,0.12);
+      --border-subtle: rgba(255,255,255,0.06);
+      --font-heading: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{
-  font-family:'Inter',system-ui,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.7;
-  -webkit-font-smoothing:antialiased;
-}
-img{display:block;max-width:100%;border-radius:6px;}
-a{color:var(--accent);text-decoration:none;}
-a:hover{color:var(--accent-warm);}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.container{max-width:820px;margin:0 auto;padding:0 1.5rem;}
+    html { scroll-behavior: smooth; }
 
-/* Header */
-.site-header{
-  border-bottom:1px solid var(--border);
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(8px);
-  position:sticky;top:0;z-index:40;
-}
-.site-header .inner{
-  display:flex;align-items:center;justify-content:space-between;
-  height:72px;
-}
-.brand{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:600;
-  font-size:1.9rem;
-  letter-spacing:.02em;
-  color:var(--text);
-}
-.brand span{color:var(--accent-warm);font-style:italic;}
-.header-sub{font-size:.75rem;color:var(--text-dim);letter-spacing:.04em;text-transform:uppercase;}
+    body {
+      background: var(--bg-deep);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* Nav */
-.nav-links{display:flex;gap:1.5rem;list-style:none;}
-.nav-links a{
-  font-size:.75rem;
-  font-weight:700;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--text-dim);
-  transition:color .15s;
-}
-.nav-links a:hover{color:var(--text);}
+    /* Fine gold top line */
+    .top-line {
+      height: 3px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
+      opacity: 0.9;
+    }
 
-/* Main */
-main{padding:3rem 0 4rem;}
-.section{margin-bottom:4rem;}
-.section h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2rem;
-  margin-bottom:.35rem;
-  line-height:1.2;
-}
-.section h2 em{color:var(--accent-warm);font-style:italic;}
-.section .meta{
-  font-size:.8rem;
-  color:var(--text-dim);
-  letter-spacing:.02em;
-  margin-bottom:1.25rem;
-}
+    /* Header */
+    header {
+      text-align: center;
+      padding: 5rem 1.5rem 3.5rem;
+      position: relative;
+    }
+    header::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2rem auto 0;
+      opacity: 0.6;
+    }
+    .site-name {
+      font-family: var(--font-heading);
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--text-main);
+      line-height: 1.05;
+    }
+    .site-name span { color: var(--gold); font-style: italic; }
+    .subtitle {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
 
-/* Small image */
-.thumb{
-  width:110px;height:72px;
-  object-fit:cover;
-  float:left;
-  margin:0 1.25rem 0.5rem 0;
-  border-radius:4px;
-  border:1px solid var(--border);
-}
-.thumb-right{float:right;margin:0 0 0.5rem 1.25rem;}
-.clear{clear:both;display:block;height:1px;}
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,15,25,0.85);
+      backdrop-filter: blur(14px) saturate(120%);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 0.25rem;
+      flex-wrap: wrap;
+      padding: 0.85rem 1rem;
+    }
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.9rem;
+      border-radius: 2px;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+    }
+    nav a:hover, nav a.active {
+      color: var(--gold);
+      border-color: rgba(212,175,55,0.25);
+      background: var(--gold-soft);
+    }
 
-/* Post teaser */
-.post-teaser{
-  padding:1.25rem 0;
-  border-bottom:1px solid var(--border);
-}
-.post-teaser:first-of-type{padding-top:0;}
-.post-teaser h3{
-  font-size:1.15rem;
-  font-weight:700;
-  margin-bottom:.35rem;
-  line-height:1.35;
-}
-.post-teaser h3 a{color:var(--text);}
-.post-teaser h3 a:hover{color:var(--accent);}
+    /* Main container */
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 6rem;
+    }
 
-.post-teaser p{
-  color:var(--text-dim);
-  font-size:.95rem;
-  line-height:1.65;
-}
+    /* Sections */
+    section { margin-bottom: 5rem; }
 
-/* Category menu bar */
-.menu-bar{
-  background:linear-gradient(90deg,#f4f6fb,#fff);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
-  padding:1rem 0;
-  margin-bottom:3rem;
-}
-.menu-bar .inner{
-  display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;
-}
-.menu-bar a{
-  padding:.35rem .85rem;
-  border-radius:9999px;
-  border:1px solid var(--border);
-  color:var(--text-dim);
-  font-size:.78rem;
-  font-weight:600;
-  letter-spacing:.03em;
-  transition:all .15s;
-}
-.menu-bar a:hover{border-color:var(--accent);color:var(--accent);}
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--text-main);
+      margin-bottom: 0.25rem;
+      position: relative;
+      display: inline-block;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 0.6rem;
+      border-radius: 1px;
+      opacity: 0.9;
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2.5rem;
+      max-width: 640px;
+    }
 
-/* Footer */
-.site-footer{
-  border-top:1px solid var(--border);
-  padding:2.5rem 0;
-  text-align:center;
-  color:var(--text-dim);
-  font-size:.82rem;
-}
-</style>
+    /* Featured / Hero */
+    .featured {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    @media (min-width: 720px) {
+      .featured { flex-direction: row; align-items: flex-start; }
+    }
+    .featured-img {
+      flex-shrink: 0;
+      width: 160px;
+      height: 160px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+    }
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(110%);
+    }
+    .featured-text h2 {
+      font-family: var(--font-heading);
+      font-size: 1.9rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+    .featured-text h2 a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,175,55,0.35);
+      transition: border-color 0.2s;
+    }
+    .featured-text h2 a:hover { border-color: var(--gold); }
+    .featured-text p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    /* Category blocks (like Hypatia Bilim) */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .cat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 1.75rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .cat-card:hover {
+      transform: translateY(-3px);
+      background: var(--bg-card-hover);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+      border-color: rgba(212,175,55,0.2);
+    }
+    .cat-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+    }
+    .cat-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .cat-card a.read {
+      display: inline-block;
+      margin-top: 0.75rem;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 1px;
+    }
+    .cat-card a.read:hover { color: var(--gold); }
+
+    /* Blog list */
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .blog-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 1.25rem;
+      transition: background 0.2s ease;
+    }
+    .blog-item:hover { background: var(--bg-card-hover); }
+    .blog-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 4px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+    }
+    .blog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(25%) contrast(105%);
+    }
+    .blog-content {
+      min-width: 0;
+    }
+    .blog-content h4 {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .blog-content h4 a {
+      color: var(--text-main);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,175,55,0.25);
+      transition: border-color 0.2s;
+    }
+    .blog-content h4 a:hover { border-color: var(--gold); }
+    .blog-content .meta {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .blog-content p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+    .blog-content .read-btn {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.35rem 0.7rem;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 0.75rem;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+    .blog-content .read-btn:hover {
+      background: var(--gold);
+      color: var(--bg-deep);
+    }
+
+    /* Small decorative stars */
+    .star-divider {
+      text-align: center;
+      margin: 4rem 0 3rem;
+      color: var(--gold);
+      letter-spacing: 1rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 2.5rem 1rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; margin: 0 0.35rem; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      .featured-img { width: 120px; height: 120px; }
+      .blog-item { flex-direction: column; }
+      .blog-thumb { width: 100%; height: 140px; }
+    }
+  </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container inner">
-    <a href="#" class="brand">Asîman <span>.</span></a>
-    <nav aria-label="Navîgasyon">
-      <ul class="nav-links">
-        <li><a href="#kuantum">Kuantûm</a></li>
-        <li><a href="#astro">Astronomî</a></li>
-        <li><a href="#fizik">Fîzîk</a></li>
-        <li><a href="#biyo">Biyolojî</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <div class="top-line"></div>
 
-<main class="container">
+  <header>
+    <h1 class="site-name">Asî<span>man</span></h1>
+    <p class="subtitle">Zanist · Xwezayî · Raman</p>
+  </header>
 
-  <!-- ===================== KURULUM / ŞABLON ===================== -->
-  <!-- 
-    NASIL YENİ YAZI EKLENİR?
-    1. Bir kategori (section) seç veya yenisini oluştur.
-    2. Aşağıdaki <article> bloğunu kopyala.
-    3. href, img src, başlık ve metni değiştir.
-    4. target="_blank" zaten var; yeni sekmede açılır.
-  -->
-
-  <section class="section" aria-label="Destpêk">
-    <h2>Asîman — <em>Bilim û Zanist</em></h2>
-    <p class="meta">Bilim, zanist û lêkolîn — bi zimanê Kurdî.</p>
-    <p>
-      Asîman, ji sala 2018'an ve di cîhana dîjîtal de dest bi rêwîtiya xwe kir. Em dixwazin zanista nûjen, ji kuantûmê heya stêrnasiyê, bi zimanê Kurdî bigihînin herkesî. Her nivîs, her lêkolîn û her nûçe — hemû bi zimanê me.
-    </p>
-  </section>
-
-  <!-- Kategori çubuğu -->
-  <nav class="menu-bar" aria-label="Kategorî">
-    <div class="container inner">
-      <a href="#kuantum">Mekanîka Kuantûmê</a>
-      <a href="#astro">Astronomî</a>
-      <a href="#fizik">Fîzîk</a>
-      <a href="#mate">Matematîk</a>
-      <a href="#kimya">Kîmya</a>
-      <a href="#biyo">Biyolojî</a>
-      <a href="#dizi">Rêzefîlm</a>
-      <a href="#listik">Lîstik</a>
-    </div>
+  <nav aria-label="Menuya kategoriyan">
+    <ul>
+      <li><a href="#fizik" class="active">Fizîk</a></li>
+      <li><a href="#astronomi">Astronomî</a></li>
+      <li><a href="#kimyageri">Kîmyagerî</a></li>
+      <li><a href="#biyoloji">Biyolojî</a></li>
+      <li><a href="#matematik">Matematîk</a></li>
+      <li><a href="#teknoloji">Teknolojî</a></li>
+    </ul>
   </nav>
 
-  <!-- ===================== KATEGORÎ 1: KUANTÛM ===================== -->
-  <section class="section" id="kuantum" aria-label="Mekanîka Kuantûmê">
-    <h2>### Mekanîka Kuantûmê</h2>
-    <p class="meta">Cîhana pir biçûk — têgehên nû</p>
+  <main class="container">
 
-    <!-- 👇 YAZI 1 -->
-    <article class="post-teaser">
-      <a href="https://example.com/kuantum-paralel" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=300&q=80" alt="Kuantûm" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/kuantum-paralel" target="_blank" rel="noopener noreferrer">
-          Cîhanên Paralel Di Kuantûmê de: Rastî an Xeyal?
-        </a>
-      </h3>
-      <p>
-        Di mekanîka kuantûmê de her biryarek dikare du encamên cuda bide. Gelo ev dibe sedema cîhanên paralel ên ku em wan nabînin?
+    <!-- Featured -->
+    <section aria-label="Sergotar" class="featured">
+      <div class="featured-img">
+        <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=320&q=80" alt="Asîman" loading="lazy" />
+      </div>
+      <div class="featured-text">
+        <h2>
+          <a href="https://example.com/asiman-ilk-kadin-uzay" target="_blank" rel="noopener">
+            Tîma yekem a jinan li fezayê: Çîroka rêwîtiya asîman
+          </a>
+        </h2>
+        <p>
+          Di sala 2019-an de, bi rêya tîmê ku ji jinên zanistvan pêk dihat, rêwîtiyeke nû li asîman dest pê kir. Ev nivîs li ser dîroka vê gavê û bandora wê li ser zanistê diaxive.
+        </p>
+      </div>
+    </section>
+
+    <div class="star-divider">✦ ✦ ✦</div>
+
+    <!-- About brief -->
+    <section aria-label="Derbarê">
+      <h2 class="section-title">Derbarê Asîman</h2>
+      <p class="section-desc">
+        Asîman malpera zanist û xwezayî ya kurdî ye. Em dixwazin zanistê bikin gelekî nêzîkî gel, bi zimanekî paqij û rengdar. Ji 2018-an ve em li vir in.
       </p>
-      <span class="clear"></span>
-    </article>
-    <!-- 👆 /YAZI 1 -->
+    </section>
 
-    <!-- 👇 YAZI 2 -->
-    <article class="post-teaser">
-      <a href="https://example.com/kuantum-elektron" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1518770660439-4636500cff5f?w=300&q=80" alt="Elektron" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/kuantum-elektron" target="_blank" rel="noopener noreferrer">
-          Elektron: Ne Tenê Perçe, Lê Pêl jî
-        </a>
-      </h3>
-      <p>
-        Elektron ne tenê perçeyek e; di heman demê de wek pêlekê jî tevdigere. Ev têgeh çawa cîhana me ya klasîk dikuje?
-      </p>
-      <span class="clear"></span>
-    </article>
-    <!-- 👆 /YAZI 2 -->
+    <!-- Categories (Hypatia-style blocks) -->
+    <section id="fizik" aria-label="Fizîk">
+      <h2 class="section-title">Fizîk</h2>
+      <p class="section-desc">Cîhana perçeyan, hêz û tevgerê.</p>
+      <div class="category-grid">
+        <article class="cat-card">
+          <h3>Kuantum Mekanîkî</h3>
+          <p>Teoriya ku li ser perçeyên biçûk ên madeyê dixebite û rêzika cîhanê diguherîne.</p>
+          <a href="https://example.com/fizik-kuantum" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+        <article class="cat-card">
+          <h3>Gravîtasyon</h3>
+          <p>Hêza ku stêr û gerstêrkan digire navenda xwe; teoriya Einstein û pêvajoya reşahiyê.</p>
+          <a href="https://example.com/fizik-gravitasyon" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+      </div>
+    </section>
 
-    <!-- 👇 BURAYA YENİ KUANTÛM YAZISI EKLE -->
-    <!-- 
-      <article class="post-teaser">
-        <a href="..." target="_blank" rel="noopener noreferrer"><img class="thumb" src="..." alt="..." width="110" height="72" loading="lazy"></a>
-        <h3><a href="..." target="_blank" rel="noopener noreferrer">BAŞLIK</a></h3>
-        <p>AÇIKLAMA...</p>
-        <span class="clear"></span>
-      </article>
-    -->
-    <!-- 👆 /YENİ -->
+    <section id="astronomi" aria-label="Astronomî">
+      <h2 class="section-title">Astronomî</h2>
+      <p class="section-desc">Asîman, stêrk û gerdûn.</p>
+      <div class="category-grid">
+        <article class="cat-card">
+          <h3>Rêya Şîrî</h3>
+          <p>Galaksiyeke mezin ku Erd û Roj tê de ne; avahiya wê û cihê me di nav de.</p>
+          <a href="https://example.com/astronomi-resa-siri" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+        <article class="cat-card">
+          <h3>Reşahî (Black Hole)</h3>
+          <p>Navenda giraniya ewqas mezin ku ronahî jî nikare jê derkeve; sirra gerdûnê.</p>
+          <a href="https://example.com/astronomi-resahi" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+      </div>
+    </section>
 
-  </section>
+    <section id="kimyageri" aria-label="Kîmyagerî">
+      <h2 class="section-title">Kîmyagerî</h2>
+      <p class="section-desc">Tevliheviya maddan û guherîna wan.</p>
+      <div class="category-grid">
+        <article class="cat-card">
+          <h3>Elementa Nû</h3>
+          <p>Çawa elementên nû tên çêkirin û rola wan di jiyana rojane de.</p>
+          <a href="https://example.com/kimyageri-elementa-nu" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+        <article class="cat-card">
+          <h3>Karbon</h3>
+          <p>Elementekî ku bingeha jiyanê ye; ji grafîtê heta almastê guherînên wî.</p>
+          <a href="https://example.com/kimyageri-karbon" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+      </div>
+    </section>
 
-  <!-- ===================== KATEGORÎ 2: ASTRONOMÎ ===================== -->
-  <section class="section" id="astro" aria-label="Astronomî">
-    <h2>### Astronomî</h2>
-    <p class="meta">Stêrk, planêt û gerdûn</p>
+    <section id="biyoloji" aria-label="Biyolojî">
+      <h2 class="section-title">Biyolojî</h2>
+      <p class="section-desc">Jiyan, genetîk û pergalên zindî.</p>
+      <div class="category-grid">
+        <article class="cat-card">
+          <h3>Genetîk</h3>
+          <p>Çawa agahiyên jiyanê di nav DNA-yê de tên nivîsandin û veguhestin.</p>
+          <a href="https://example.com/biyoloji-genetik" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+        <article class="cat-card">
+          <h3>Evolûsyon</h3>
+          <p>Teoriya guherîna cureyan li ser demê û rola hilbijartina xwezayî.</p>
+          <a href="https://example.com/biyoloji-evolusyon" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+      </div>
+    </section>
 
-    <!-- 👇 YAZI 1 -->
-    <article class="post-teaser">
-      <a href="https://example.com/astro-biori" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=300&q=80" alt="Stêrk" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/astro-biori" target="_blank" rel="noopener noreferrer">
-          Rêwîtiya Jiyanê: Ma Em Di Cîhanê de Bi Tenê ne?
-        </a>
-      </h3>
-      <p>
-        Lêkolînên nû yên NASA û ESA nîşan didin ku stêrkên nêzîk ên mîna Proxima Centauri dikarin jiyanê hewînin.
-      </p>
-      <span class="clear"></span>
-    </article>
-    <!-- 👆 /YAZI 1 -->
+    <section id="matematik" aria-label="Matematîk">
+      <h2 class="section-title">Matematîk</h2>
+      <p class="section-desc">Zimanê zanistê; hejmar, şekil û mantiq.</p>
+      <div class="category-grid">
+        <article class="cat-card">
+          <h3>Teoriya Hejmaran</h3>
+          <p>Hevpişk û taybetiyên hejmaran; ji Fermat heta Riemann.</p>
+          <a href="https://example.com/matematik-teoriya-hejmaran" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+        <article class="cat-card">
+          <h3>Geometrî</h3>
+          <p>Şeklên cîhanê û têkiliya wan bi fîzîka modern re.</p>
+          <a href="https://example.com/matematik-geometri" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+      </div>
+    </section>
 
-    <!-- 👇 BURAYA YENİ ASTRONOMÎ YAZISI EKLE -->
-    <!-- 
-      <article class="post-teaser">
-        <a href="..." target="_blank" rel="noopener noreferrer"><img class="thumb" src="..." alt="..." width="110" height="72" loading="lazy"></a>
-        <h3><a href="..." target="_blank" rel="noopener noreferrer">BAŞLIK</a></h3>
-        <p>AÇIKLAMA...</p>
-        <span class="clear"></span>
-      </article>
-    -->
-    <!-- 👆 /YENİ -->
+    <section id="teknoloji" aria-label="Teknolojî">
+      <h2 class="section-title">Teknolojî</h2>
+      <p class="section-desc">Amûr, tor û dahênana nû.</p>
+      <div class="category-grid">
+        <article class="cat-card">
+          <h3>Zanista Kompîturê</h3>
+          <p>Algorîtma, fêrbûna makîne û pêşeroja teknolojiyê.</p>
+          <a href="https://example.com/teknoloji-zanista-komputure" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+        <article class="cat-card">
+          <h3>AI û Etîk</h3>
+          <p>Çawa zîrekiya çêkirî jiyana me diguherîne û pirsên etîkî yên ku tîne.</p>
+          <a href="https://example.com/teknoloji-ai-etikk" class="read" target="_blank" rel="noopener">Bixwîne →</a>
+        </article>
+      </div>
+    </section>
 
-  </section>
+    <div class="star-divider">✦ ✦ ✦</div>
 
-  <!-- ===================== KATEGORÎ 3: FÎZÎK ===================== -->
-  <section class="section" id="fizik" aria-label="Fîzîk">
-    <h2>### Fîzîk</h2>
-    <p class="meta">Qanûnên bingehîn ên xwezayê</p>
+    <!-- Blog posts -->
+    <section aria-label="Nivîsên Dawî">
+      <h2 class="section-title">Nivîsên Dawî</h2>
+      <p class="section-desc">Gotarên nû yên zanistî û kurdî.</p>
 
-    <article class="post-teaser">
-      <a href="https://example.com/fizik-nobel" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=300&q=80" alt="Lab" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/fizik-nobel" target="_blank" rel="noopener noreferrer">
-          Xelata Nobelê ya Fîzîkê 2023: Elektronên Lezgîn
-        </a>
-      </h3>
-      <p>
-        Xelata Nobelê ya Fîzîkê ya sala 2023'an ji bo lêkolînên li ser elektronên ultra-lezgîn hat dayîn. Ev çawa ronahiyê li ser atomê dide?
-      </p>
-      <span class="clear"></span>
-    </article>
+      <div class="blog-list">
+        <article class="blog-item">
+          <a href="https://example.com/blog/roj" class="blog-thumb" target="_blank" rel="noopener" aria-label="Wêneya nivîsê">
+            <img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=160&q=80" alt="Roj" loading="lazy" />
+          </a>
+          <div class="blog-content">
+            <div class="meta">Astronomî</div>
+            <h4>
+              <a href="https://example.com/blog/roj" target="_blank" rel="noopener">
+                Çima Roj sor dibe? Rengê stêrkê û atmosfera Erdê
+              </a>
+            </h4>
+            <p>
+              Di dema rojbûn û rojavabûnê de, Roj sor dibe ji ber belavbûna ronahiyê di atmosfera me de.
+            </p>
+            <a href="https://example.com/blog/roj" class="read-btn" target="_blank" rel="noopener">Bixwîne</a>
+          </div>
+        </article>
 
-    <!-- 👇 BURAYA YENİ FÎZÎK YAZISI EKLE -->
+        <article class="blog-item">
+          <a href="https://example.com/blog/dna" class="blog-thumb" target="_blank" rel="noopener" aria-label="Wêneya nivîsê">
+            <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=160&q=80" alt="DNA" loading="lazy" />
+          </a>
+          <div class="blog-content">
+            <div class="meta">Biyolojî</div>
+            <h4>
+              <a href="https://example.com/blog/dna" target="_blank" rel="noopener">
+                DNA: Pirtûka jiyanê ya di nav her xaneya me de
+              </a>
+            </h4>
+            <p>
+              Her roj bedenê me bi milyonan xaneyan nû dike; her yek ji wan xwedî pirtûkeke DNA-yê ye.
+            </p>
+            <a href="https://example.com/blog/dna" class="read-btn" target="_blank" rel="noopener">Bixwîne</a>
+          </div>
+        </article>
 
-  </section>
+        <article class="blog-item">
+          <a href="https://example.com/blog/zer" class="blog-thumb" target="_blank" rel="noopener" aria-label="Wêneya nivîsê">
+            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=160&q=80" alt="Matematîk" loading="lazy" />
+          </a>
+          <div class="blog-content">
+            <div class="meta">Matematîk</div>
+            <h4>
+              <a href="https://example.com/blog/zer" target="_blank" rel="noopener">
+                Hejmara sifir: Ji tunebûnê heta bingeha hejmaran
+              </a>
+            </h4>
+            <p>
+                Sifir ne tenê tunebûn e; ew bingeha hejmarên pozîtîf û negatîf ên din e.
+            </p>
+            <a href="https://example.com/blog/zer" class="read-btn" target="_blank" rel="noopener">Bixwîne</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  <!-- ===================== KATEGORÎ 4: MATEMATÎK ===================== -->
-  <section class="section" id="mate" aria-label="Matematîk">
-    <h2>### Matematîk</h2>
-    <p class="meta">Zimanê gerdûnê</p>
+  </main>
 
-    <article class="post-teaser">
-      <a href="https://example.com/mate-topoloji" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=300&q=80" alt="Matematîk" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/mate-topoloji" target="_blank" rel="noopener noreferrer">
-          Topolojî: Çawa Cîhan Bi Hev Re Girêdayî ye?
-        </a>
-      </h3>
-      <p>
-        Topolojî ne tenê matematîk e; di zanistên din de jî tê bikaranîn, bi taybetî di fîzîka modern de.
-      </p>
-      <span class="clear"></span>
-    </article>
-
-    <!-- 👇 BURAYA YENİ MATEMATÎK YAZISI EKLE -->
-
-  </section>
-
-  <!-- ===================== KATEGORÎ 5: KÎMYA ===================== -->
-  <section class="section" id="kimya" aria-label="Kîmya">
-    <h2>### Kîmya</h2>
-    <p class="meta">Perdeya jiyanê</p>
-
-    <article class="post-teaser">
-      <a href="https://example.com/kimya-hidrojen" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1532187863486-abf9dbad1bac?w=300&q=80" alt="Kîmya" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/kimya-hidrojen" target="_blank" rel="noopener noreferrer">
-          Hîdrojen: Enerjiya Paqij a Siberojê
-        </a>
-      </h3>
-      <p>
-        Kîmya nû rêyên çêkirina enerjiya paqij ji hîdrojenê vedike. Ev dikare bibe çareseriya guherîna avhewayê.
-      </p>
-      <span class="clear"></span>
-    </article>
-
-    <!-- 👇 BURAYA YENİ KÎMYA YAZISI EKLE -->
-
-  </section>
-
-  <!-- ===================== KATEGORÎ 6: BİYOLOJÎ ===================== -->
-  <section class="section" id="biyo" aria-label="Biyolojî">
-    <h2>### Biyolojî</h2>
-    <p class="meta">Jiyan û dîroka wê</p>
-
-    <article class="post-teaser">
-      <a href="https://example.com/biyo-genom" target="_blank" rel="noopener noreferrer">
-        <img class="thumb" src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=300&q=80" alt="Biyolojî" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/biyo-genom" target="_blank" rel="noopener noreferrer">
-          Genomên Kurdî: Dîrokeke Ku Jiyana Me Dide Zanîn
-        </a>
-      </h3>
-      <p>
-        Lêkolînên genetîkê yên li ser gelê Kurd nîşan didin ku dîroke dûr û dirêj a mirovahiyê heye.
-      </p>
-      <span class="clear"></span>
-    </article>
-
-    <!-- 👇 BURAYA YENİ BİYOLOJÎ YAZISI EKLE -->
-
-  </section>
-
-  <!-- ===================== KATEGORÎ 7: DÎZÎ / LÎSTIK ===================== -->
-  <section class="section" id="dizi" aria-label="Rêzefîlm û Lîstik">
-    <h2>### Rêzefîlm û Lîstik</h2>
-    <p class="meta">Zanist di çandê de</p>
-
-    <article class="post-teaser">
-      <a href="https://example.com/dizi-sci-fi" target="_blank" rel="noopener noreferrer">
-        <img class="thumb thumb-right" src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=300&q=80" alt="Dîzî" width="110" height="72" loading="lazy">
-      </a>
-      <h3>
-        <a href="https://example.com/dizi-sci-fi" target="_blank" rel="noopener noreferrer">
-          Fîlmên Zanistî: Gelo Çawa Em Dikarin Jiyaneke Nû Bikin?
-        </a>
-      </h3>
-      <p>
-        Dîzî û fîlmên zanistî ne tenê şahîn in; gelek caran pêşeroja zanistê nîşan didin. Em lêkolînan dikin û fêm dikin.
-      </p>
-      <span class="clear"></span>
-    </article>
-
-    <!-- 👇 BURAYA YENİ DÎZÎ / LÎSTIK YAZISI EKLE -->
-
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container">
-    <p><strong>Asîman</strong> — Bilim û Zanist bi zimanê Kurdî. Hemî maf parastî ne. <br>
-    Hemû nivîs <code>target="_blank"</code> in; di sekmeya nû de vedibin.</p>
-  </div>
-</footer>
-
-<!-- ===================== EKLEME REHBERİ (KURDÎ) ===================== -->
-<!-- 
-  NASIL YENİ KATEGORÎ EKLENİR?
-  1. Yukarıda bir <section class="section" id="..."> bloğu kopyala.
-  2. id, aria-label ve h2 içindeki ### başlığı değiştir.
-  3. Menubara (<nav class="menu-bar">) yeni bir <a href="#..."> ekle.
-  4. Üst menüde (<ul class="nav-links">) gerekirse yeni link ekle.
--->
+  <footer>
+    <p>
+      <strong>Asîman</strong> — Zanist û Xwezayî <br>
+      <a href="#fizik">Fizîk</a> · <a href="#astronomi">Astronomî</a> · <a href="#biyoloji">Biyolojî</a> · <a href="#teknoloji">Teknolojî</a>
+    </p>
+    <p style="margin-top:0.5rem; opacity:0.7;">© 2026 Asîman. Hemî maf parastî ne.</p>
+  </footer>
 
 </body>
 </html>
