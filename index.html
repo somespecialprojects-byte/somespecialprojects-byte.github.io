@@ -2,26 +2,27 @@
 <html lang="ku">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asîman — Zanist û Xwezayî</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Asîman — Malpera Zanistî ya Kurdî</title>
+  
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-deep: #0b0f19;
-      --bg-card: #111827;
-      --bg-card-hover: #161f36;
-      --text-main: #f0ece6;
-      --text-muted: #94a3b8;
-      --gold: #d4af37;
-      --gold-soft: rgba(212,175,55,0.12);
-      --sky-soft: rgba(56,189,248,0.12);
-      --border-subtle: rgba(255,255,255,0.06);
-      --font-heading: 'Cormorant Garamond', Georgia, serif;
-      --font-body: 'Inter', system-ui, sans-serif;
+      --bg-deep: #040a18;
+      --bg-card: rgba(15, 28, 55, 0.65);
+      --glass-border: rgba(255,255,255,0.06);
+      --text-main: #f0f4f8;
+      --text-soft: #a8b2c8;
+      --accent-cyan: #22d3ee;
+      --accent-amber: #f59e0b;
+      --accent-purple: #9d6ce8;
+      --accent-rose: #f472b6;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,537 +34,683 @@
       color: var(--text-main);
       font-family: var(--font-body);
       line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* Fine gold top line */
-    .top-line {
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, var(--gold) 40%, var(--gold) 60%, transparent 100%);
-      opacity: 0.9;
-    }
-
-    /* Header */
-    header {
-      text-align: center;
-      padding: 5rem 1.5rem 3.5rem;
-      position: relative;
-    }
-    header::after {
+    /* Subtle radial glow behind everything */
+    body::before {
       content: "";
-      display: block;
-      width: 60px;
-      height: 1px;
-      background: var(--gold);
-      margin: 2rem auto 0;
-      opacity: 0.6;
-    }
-    .site-name {
-      font-family: var(--font-heading);
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--text-main);
-      line-height: 1.05;
-    }
-    .site-name span { color: var(--gold); font-style: italic; }
-    .subtitle {
-      margin-top: 0.75rem;
-      font-size: 0.9rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 300;
+      position: fixed;
+      top: -20%;
+      left: -10%;
+      width: 70vw;
+      height: 70vh;
+      background: radial-gradient(circle, rgba(34,211,238,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* Navigation */
-    nav {
+    /* Header / Nav */
+    header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(11,15,25,0.85);
-      backdrop-filter: blur(14px) saturate(120%);
-      border-bottom: 1px solid var(--border-subtle);
+      backdrop-filter: blur(14px) saturate(1.2);
+      -webkit-backdrop-filter: blur(14px) saturate(1.2);
+      background: rgba(4,10,24,0.75);
+      border-bottom: 1px solid var(--glass-border);
     }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 0.4em;
+    }
+
+    .logo .dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-cyan);
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.3); }
+    }
+
     nav ul {
       list-style: none;
       display: flex;
-      justify-content: center;
-      gap: 0.25rem;
-      flex-wrap: wrap;
-      padding: 0.85rem 1rem;
+      gap: 2rem;
     }
+
     nav a {
-      color: var(--text-muted);
+      color: var(--text-soft);
       text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
+      font-weight: 500;
+      font-size: 0.92rem;
+      letter-spacing: 0.03em;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--text-main);
+    }
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 8rem 2rem 6rem;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    .hero-sub {
       text-transform: uppercase;
-      padding: 0.45rem 0.9rem;
-      border-radius: 2px;
+      letter-spacing: 0.22em;
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.95;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-soft);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.15rem;
+      font-weight: 300;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
       transition: all 0.25s ease;
       border: 1px solid transparent;
     }
-    nav a:hover, nav a.active {
-      color: var(--gold);
-      border-color: rgba(212,175,55,0.25);
-      background: var(--gold-soft);
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(34,211,238,0.25);
     }
 
-    /* Main container */
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem 6rem;
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(34,211,238,0.35);
+    }
+
+    .btn-outline {
+      border-color: rgba(255,255,255,0.15);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
     }
 
     /* Sections */
-    section { margin-bottom: 5rem; }
+    section { position: relative; z-index: 1; }
 
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--text-main);
-      margin-bottom: 0.25rem;
-      position: relative;
-      display: inline-block;
-    }
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 40px;
-      height: 2px;
-      background: var(--gold);
-      margin-top: 0.6rem;
-      border-radius: 1px;
-      opacity: 0.9;
-    }
-    .section-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 2.5rem;
-      max-width: 640px;
+    .section-label {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+      margin-bottom: 0.75rem;
     }
 
-    /* Featured / Hero */
+    /* Featured / Hero Post */
     .featured {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
     }
-    @media (min-width: 720px) {
-      .featured { flex-direction: row; align-items: flex-start; }
-    }
-    .featured-img {
-      flex-shrink: 0;
-      width: 160px;
-      height: 160px;
-      border-radius: 4px;
+
+    .featured-card {
+      position: relative;
+      border-radius: 24px;
       overflow: hidden;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+      border: 1px solid var(--glass-border);
+      background: linear-gradient(180deg, rgba(15,28,55,0.9), rgba(4,10,24,0.95));
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 0;
+      align-items: stretch;
     }
-    .featured-img img {
+
+    .featured-card .img-wrap {
+      position: relative;
+      overflow: hidden;
+      min-height: 420px;
+    }
+
+    .featured-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(20%) contrast(110%);
+      filter: brightness(0.85) contrast(1.1);
+      transition: transform 0.6s ease;
     }
-    .featured-text h2 {
-      font-family: var(--font-heading);
-      font-size: 1.9rem;
-      font-weight: 600;
-      line-height: 1.2;
+
+    .featured-card:hover img { transform: scale(1.03); }
+
+    .featured-card .content {
+      padding: 3rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: rgba(34,211,238,0.1);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(34,211,238,0.15);
       margin-bottom: 1rem;
-      color: var(--text-main);
+      width: fit-content;
     }
-    .featured-text h2 a {
+
+    .featured-card h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .featured-card h2 a {
       color: inherit;
       text-decoration: none;
-      border-bottom: 1px solid rgba(212,175,55,0.35);
-      transition: border-color 0.2s;
-    }
-    .featured-text h2 a:hover { border-color: var(--gold); }
-    .featured-text p {
-      color: var(--text-muted);
-      font-size: 1rem;
     }
 
-    /* Category blocks (like Hypatia Bilim) */
-    .category-grid {
+    .featured-card h2 a:hover {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-amber));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .featured-card .meta {
+      color: var(--text-soft);
+      font-size: 0.85rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .featured-card p {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Blog Grid */
+    .posts {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+    }
+
+    .posts-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 2.5rem;
+    }
+
+    .posts-header h2 {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    .post-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
     }
-    .cat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 1.75rem;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    }
-    .cat-card:hover {
-      transform: translateY(-3px);
-      background: var(--bg-card-hover);
-      box-shadow: 0 12px 28px rgba(0,0,0,0.25);
-      border-color: rgba(212,175,55,0.2);
-    }
-    .cat-card h3 {
-      font-family: var(--font-heading);
-      font-size: 1.25rem;
-      margin-bottom: 0.5rem;
-      color: var(--gold);
-    }
-    .cat-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-    .cat-card a.read {
-      display: inline-block;
-      margin-top: 0.75rem;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--gold);
-      padding-bottom: 1px;
-    }
-    .cat-card a.read:hover { color: var(--gold); }
 
-    /* Blog list */
-    .blog-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-    .blog-item {
-      display: flex;
-      gap: 1.25rem;
-      align-items: flex-start;
+    .post-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 6px;
-      padding: 1.25rem;
-      transition: background 0.2s ease;
-    }
-    .blog-item:hover { background: var(--bg-card-hover); }
-    .blog-thumb {
-      width: 80px;
-      height: 80px;
-      border-radius: 4px;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
       overflow: hidden;
-      flex-shrink: 0;
-      border: 1px solid var(--border-subtle);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
     }
-    .blog-thumb img {
+
+    .post-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .post-card a.thumb {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      height: 180px;
+    }
+
+    .post-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(25%) contrast(105%);
-    }
-    .blog-content {
-      min-width: 0;
-    }
-    .blog-content h4 {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
-    .blog-content h4 a {
-      color: var(--text-main);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(212,175,55,0.25);
-      transition: border-color 0.2s;
-    }
-    .blog-content h4 a:hover { border-color: var(--gold); }
-    .blog-content .meta {
-      font-size: 0.75rem;
-      color: var(--gold);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-    }
-    .blog-content p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-    .blog-content .read-btn {
-      display: inline-block;
-      margin-top: 0.6rem;
-      padding: 0.35rem 0.7rem;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      text-decoration: none;
-      font-size: 0.75rem;
-      border-radius: 2px;
-      letter-spacing: 0.06em;
-      transition: all 0.2s;
-    }
-    .blog-content .read-btn:hover {
-      background: var(--gold);
-      color: var(--bg-deep);
+      filter: brightness(0.9) contrast(1.05);
+      transition: transform 0.5s ease;
     }
 
-    /* Small decorative stars */
-    .star-divider {
-      text-align: center;
-      margin: 4rem 0 3rem;
-      color: var(--gold);
-      letter-spacing: 1rem;
-      font-size: 0.9rem;
-      opacity: 0.7;
+    .post-card:hover img { transform: scale(1.05); }
+
+    .post-card .badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .post-card .badge.astronomy { background: var(--accent-cyan); color: #000; }
+    .post-card .badge.physics { background: var(--accent-amber); color: #000; }
+    .post-card .badge.biology { background: var(--accent-rose); color: #fff; }
+    .post-card .badge.chemistry { background: var(--accent-purple); color: #fff; }
+
+    .post-card .info {
+      padding: 1.4rem 1.6rem;
+    }
+
+    .post-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-card h3 a {
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .post-card h3 a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .post-card .date {
+      color: var(--text-soft);
+      font-size: 0.8rem;
+      margin-bottom: 0.7rem;
+      display: block;
+    }
+
+    .post-card p {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.6;
+    }
+
+    /* Categories */
+    .categories {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--glass-border);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .cat-card {
+      padding: 2rem 1.5rem;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(34,211,238,0.06), rgba(157,108,230,0.06));
+      border: 1px solid var(--glass-border);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s ease;
+      display: block;
+    }
+
+    .cat-card:hover {
+      border-color: rgba(255,255,255,0.15);
+      background: linear-gradient(145deg, rgba(34,211,238,0.1), rgba(157,108,230,0.1));
+      transform: translateY(-3px);
+    }
+
+    .cat-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .cat-card span {
+      font-size: 0.85rem;
+      color: var(--text-soft);
     }
 
     /* Footer */
     footer {
-      border-top: 1px solid var(--border-subtle);
-      padding: 2.5rem 1rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 2rem;
+      border-top: 1px solid var(--glass-border);
+      position: relative;
+      z-index: 1;
     }
-    footer a { color: var(--gold); text-decoration: none; margin: 0 0.35rem; }
-    footer a:hover { text-decoration: underline; }
 
-    /* Mobile tweaks */
-    @media (max-width: 480px) {
-      .featured-img { width: 120px; height: 120px; }
-      .blog-item { flex-direction: column; }
-      .blog-thumb { width: 100%; height: 140px; }
+    footer .brand {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: var(--text-main);
+    }
+
+    footer .brand small {
+      display: block;
+      color: var(--text-soft);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+
+    footer .links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    footer .links a {
+      color: var(--text-soft);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    footer .links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-card .img-wrap { min-height: 260px; }
+      .nav-inner { flex-direction: column; gap: 1rem; align-items: flex-start; }
+      nav ul { gap: 1rem; flex-wrap: wrap; }
+      footer { flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <div class="top-line"></div>
-
   <header>
-    <h1 class="site-name">Asî<span>man</span></h1>
-    <p class="subtitle">Zanist · Xwezayî · Raman</p>
+    <div class="nav-inner">
+      <a href="#" class="logo">Asîman <span class="dot"></span></a>
+      <nav>
+        <ul>
+          <li><a href="#nivisan">Nivîsan</a></li>
+          <li><a href="#kategoriyan">Kategoriyan</a></li>
+          <li><a href="#têkildarî">Têkildarî</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <nav aria-label="Menuya kategoriyan">
-    <ul>
-      <li><a href="#fizik" class="active">Fizîk</a></li>
-      <li><a href="#astronomi">Astronomî</a></li>
-      <li><a href="#kimyageri">Kîmyagerî</a></li>
-      <li><a href="#biyoloji">Biyolojî</a></li>
-      <li><a href="#matematik">Matematîk</a></li>
-      <li><a href="#teknoloji">Teknolojî</a></li>
-    </ul>
-  </nav>
-
-  <main class="container">
-
-    <!-- Featured -->
-    <section aria-label="Sergotar" class="featured">
-      <div class="featured-img">
-        <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=320&q=80" alt="Asîman" loading="lazy" />
-      </div>
-      <div class="featured-text">
-        <h2>
-          <a href="https://example.com/asiman-ilk-kadin-uzay" target="_blank" rel="noopener">
-            Tîma yekem a jinan li fezayê: Çîroka rêwîtiya asîman
-          </a>
-        </h2>
-        <p>
-          Di sala 2019-an de, bi rêya tîmê ku ji jinên zanistvan pêk dihat, rêwîtiyeke nû li asîman dest pê kir. Ev nivîs li ser dîroka vê gavê û bandora wê li ser zanistê diaxive.
-        </p>
-      </div>
-    </section>
-
-    <div class="star-divider">✦ ✦ ✦</div>
-
-    <!-- About brief -->
-    <section aria-label="Derbarê">
-      <h2 class="section-title">Derbarê Asîman</h2>
-      <p class="section-desc">
-        Asîman malpera zanist û xwezayî ya kurdî ye. Em dixwazin zanistê bikin gelekî nêzîkî gel, bi zimanekî paqij û rengdar. Ji 2018-an ve em li vir in.
+  <main>
+    <section class="hero" aria-label="Serdest">
+      <p class="hero-sub">Zanist • Felsefe • Teknolojî</p>
+      <h1>Asîman <em>—</em> Di Navbera Stêrkan De</h1>
+      <p>
+        Malpereke zanistî ya bi kurdî. Ji atomê bigire heta galaksiyan, em li ser hemû tiştên ku cîhanê eleqedar dikin dinivîsin.
       </p>
-    </section>
-
-    <!-- Categories (Hypatia-style blocks) -->
-    <section id="fizik" aria-label="Fizîk">
-      <h2 class="section-title">Fizîk</h2>
-      <p class="section-desc">Cîhana perçeyan, hêz û tevgerê.</p>
-      <div class="category-grid">
-        <article class="cat-card">
-          <h3>Kuantum Mekanîkî</h3>
-          <p>Teoriya ku li ser perçeyên biçûk ên madeyê dixebite û rêzika cîhanê diguherîne.</p>
-          <a href="https://example.com/fizik-kuantum" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-        <article class="cat-card">
-          <h3>Gravîtasyon</h3>
-          <p>Hêza ku stêr û gerstêrkan digire navenda xwe; teoriya Einstein û pêvajoya reşahiyê.</p>
-          <a href="https://example.com/fizik-gravitasyon" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
+      <div class="btn-group">
+        <a href="#nivisan" class="btn btn-primary">Nivîsên Nû</a>
+        <a href="#kategoriyan" class="btn btn-outline">Kategoriyan</a>
       </div>
     </section>
 
-    <section id="astronomi" aria-label="Astronomî">
-      <h2 class="section-title">Astronomî</h2>
-      <p class="section-desc">Asîman, stêrk û gerdûn.</p>
-      <div class="category-grid">
-        <article class="cat-card">
-          <h3>Rêya Şîrî</h3>
-          <p>Galaksiyeke mezin ku Erd û Roj tê de ne; avahiya wê û cihê me di nav de.</p>
-          <a href="https://example.com/astronomi-resa-siri" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-        <article class="cat-card">
-          <h3>Reşahî (Black Hole)</h3>
-          <p>Navenda giraniya ewqas mezin ku ronahî jî nikare jê derkeve; sirra gerdûnê.</p>
-          <a href="https://example.com/astronomi-resahi" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-      </div>
+    <!-- Featured Post -->
+    <section class="featured" aria-label="Nivîsa Taybet">
+      <article class="featured-card">
+        <div class="img-wrap">
+          <img src="https://images.unsplash.com/photo-1465101162946-4377e57745c3?q=80&w=1000&auto=format&fit=crop" alt="Gerdûn" loading="eager" />
+        </div>
+        <div class="content">
+          <span class="tag">Astronomî</span>
+          <h2><a href="https://example.com/nivisa-gerdun" target="_blank" rel="noopener noreferrer">Gerdûn Çawa Çêbû? Teoriyên Nû Yên Çêbûna Gerdûnê</a></h2>
+          <p class="meta">Ji hêla Rojîn Amed • 18ê Tîrmehê, 2026</p>
+          <p>
+            Di van salên dawî de, zanyaran teoriyên nû yên derbarê Big Bang û pêkhatina gerdûnê pêşkêş kirin. Ev nivîs bi awayekî sade û zelal hemû tiştên girîng vedibêje.
+          </p>
+          <a href="https://example.com/nivisa-gerdun" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="align-self: flex-start;">Bixwîne →</a>
+        </div>
+      </article>
     </section>
 
-    <section id="kimyageri" aria-label="Kîmyagerî">
-      <h2 class="section-title">Kîmyagerî</h2>
-      <p class="section-desc">Tevliheviya maddan û guherîna wan.</p>
-      <div class="category-grid">
-        <article class="cat-card">
-          <h3>Elementa Nû</h3>
-          <p>Çawa elementên nû tên çêkirin û rola wan di jiyana rojane de.</p>
-          <a href="https://example.com/kimyageri-elementa-nu" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-        <article class="cat-card">
-          <h3>Karbon</h3>
-          <p>Elementekî ku bingeha jiyanê ye; ji grafîtê heta almastê guherînên wî.</p>
-          <a href="https://example.com/kimyageri-karbon" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
+    <!-- Blog Posts Grid -->
+    <section class="posts" id="nivisan" aria-label="Nivîsen Blogê">
+      <div class="posts-header">
+        <h2>Nivîsên Dawî</h2>
+        <span style="color: var(--text-soft); font-size: 0.9rem;">6 nivîs hatine weşandin</span>
       </div>
-    </section>
 
-    <section id="biyoloji" aria-label="Biyolojî">
-      <h2 class="section-title">Biyolojî</h2>
-      <p class="section-desc">Jiyan, genetîk û pergalên zindî.</p>
-      <div class="category-grid">
-        <article class="cat-card">
-          <h3>Genetîk</h3>
-          <p>Çawa agahiyên jiyanê di nav DNA-yê de tên nivîsandin û veguhestin.</p>
-          <a href="https://example.com/biyoloji-genetik" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-        <article class="cat-card">
-          <h3>Evolûsyon</h3>
-          <p>Teoriya guherîna cureyan li ser demê û rola hilbijartina xwezayî.</p>
-          <a href="https://example.com/biyoloji-evolusyon" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-      </div>
-    </section>
+      <div class="post-grid">
 
-    <section id="matematik" aria-label="Matematîk">
-      <h2 class="section-title">Matematîk</h2>
-      <p class="section-desc">Zimanê zanistê; hejmar, şekil û mantiq.</p>
-      <div class="category-grid">
-        <article class="cat-card">
-          <h3>Teoriya Hejmaran</h3>
-          <p>Hevpişk û taybetiyên hejmaran; ji Fermat heta Riemann.</p>
-          <a href="https://example.com/matematik-teoriya-hejmaran" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-        <article class="cat-card">
-          <h3>Geometrî</h3>
-          <p>Şeklên cîhanê û têkiliya wan bi fîzîka modern re.</p>
-          <a href="https://example.com/matematik-geometri" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="teknoloji" aria-label="Teknolojî">
-      <h2 class="section-title">Teknolojî</h2>
-      <p class="section-desc">Amûr, tor û dahênana nû.</p>
-      <div class="category-grid">
-        <article class="cat-card">
-          <h3>Zanista Kompîturê</h3>
-          <p>Algorîtma, fêrbûna makîne û pêşeroja teknolojiyê.</p>
-          <a href="https://example.com/teknoloji-zanista-komputure" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-        <article class="cat-card">
-          <h3>AI û Etîk</h3>
-          <p>Çawa zîrekiya çêkirî jiyana me diguherîne û pirsên etîkî yên ku tîne.</p>
-          <a href="https://example.com/teknoloji-ai-etikk" class="read" target="_blank" rel="noopener">Bixwîne →</a>
-        </article>
-      </div>
-    </section>
-
-    <div class="star-divider">✦ ✦ ✦</div>
-
-    <!-- Blog posts -->
-    <section aria-label="Nivîsên Dawî">
-      <h2 class="section-title">Nivîsên Dawî</h2>
-      <p class="section-desc">Gotarên nû yên zanistî û kurdî.</p>
-
-      <div class="blog-list">
-        <article class="blog-item">
-          <a href="https://example.com/blog/roj" class="blog-thumb" target="_blank" rel="noopener" aria-label="Wêneya nivîsê">
-            <img src="https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=160&q=80" alt="Roj" loading="lazy" />
+        <!-- Post 1 -->
+        <article class="post-card">
+          <a href="https://example.com/n1" target="_blank" rel="noopener noreferrer" class="thumb" aria-label="Nivîsa 1">
+            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=600&auto=format&fit=crop" alt="Atom" loading="lazy" />
+            <span class="badge physics">Fîzîk</span>
           </a>
-          <div class="blog-content">
-            <div class="meta">Astronomî</div>
-            <h4>
-              <a href="https://example.com/blog/roj" target="_blank" rel="noopener">
-                Çima Roj sor dibe? Rengê stêrkê û atmosfera Erdê
-              </a>
-            </h4>
-            <p>
-              Di dema rojbûn û rojavabûnê de, Roj sor dibe ji ber belavbûna ronahiyê di atmosfera me de.
-            </p>
-            <a href="https://example.com/blog/roj" class="read-btn" target="_blank" rel="noopener">Bixwîne</a>
+          <div class="info">
+            <h3><a href="https://example.com/n1" target="_blank" rel="noopener noreferrer">Cîhana Kuantûmê: Çima Elektron Hem Pêl Hem Parçik e?</a></h3>
+            <span class="date">12 Tîrmeh 2026</span>
+            <p>Teoriya kuantûmê yek ji mijarên herî ecêb ên zanistê ye. Di vê nivîsê de em vê cîhanê hêsan dikin.</p>
           </div>
         </article>
 
-        <article class="blog-item">
-          <a href="https://example.com/blog/dna" class="blog-thumb" target="_blank" rel="noopener" aria-label="Wêneya nivîsê">
-            <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=160&q=80" alt="DNA" loading="lazy" />
+        <!-- Post 2 -->
+        <article class="post-card">
+          <a href="https://example.com/n2" target="_blank" rel="noopener noreferrer" class="thumb" aria-label="Nivîsa 2">
+            <img src="https://images.unsplash.com/photo-1507413245164-6160d8298bd6?q=80&w=600&auto=format&fit=crop" alt="Laboratuvar" loading="lazy" />
+            <span class="badge chemistry">Kîmya</span>
           </a>
-          <div class="blog-content">
-            <div class="meta">Biyolojî</div>
-            <h4>
-              <a href="https://example.com/blog/dna" target="_blank" rel="noopener">
-                DNA: Pirtûka jiyanê ya di nav her xaneya me de
-              </a>
-            </h4>
-            <p>
-              Her roj bedenê me bi milyonan xaneyan nû dike; her yek ji wan xwedî pirtûkeke DNA-yê ye.
-            </p>
-            <a href="https://example.com/blog/dna" class="read-btn" target="_blank" rel="noopener">Bixwîne</a>
+          <div class="info">
+            <h3><a href="https://example.com/n2" target="_blank" rel="noopener noreferrer">Reaksiyonên Kîmyewî Di Jiyana Rojane De</a></h3>
+            <span class="date">9 Tîrmeh 2026</span>
+            <p>Ji pijandina nan bigire heta pîvana dermanan, kîmya her dem di nav jiyanê de ye.</p>
           </div>
         </article>
 
-        <article class="blog-item">
-          <a href="https://example.com/blog/zer" class="blog-thumb" target="_blank" rel="noopener" aria-label="Wêneya nivîsê">
-            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=160&q=80" alt="Matematîk" loading="lazy" />
+        <!-- Post 3 -->
+        <article class="post-card">
+          <a href="https://example.com/n3" target="_blank" rel="noopener noreferrer" class="thumb" aria-label="Nivîsa 3">
+            <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=600&auto=format&fit=crop" alt="DNA" loading="lazy" />
+            <span class="badge biology">Biyolojî</span>
           </a>
-          <div class="blog-content">
-            <div class="meta">Matematîk</div>
-            <h4>
-              <a href="https://example.com/blog/zer" target="_blank" rel="noopener">
-                Hejmara sifir: Ji tunebûnê heta bingeha hejmaran
-              </a>
-            </h4>
-            <p>
-                Sifir ne tenê tunebûn e; ew bingeha hejmarên pozîtîf û negatîf ên din e.
-            </p>
-            <a href="https://example.com/blog/zer" class="read-btn" target="_blank" rel="noopener">Bixwîne</a>
+          <div class="info">
+            <h3><a href="https://example.com/n3" target="_blank" rel="noopener noreferrer">DNA: Rêbernameya Jiyanê Çawa Dixebite?</a></h3>
+            <span class="date">5 Tîrmeh 2026</span>
+            <p>Di hundirê her hucreya me de, rêbernameyek dirêj û ecêb heye. Em ê li ser DNA-yê binivîsin.</p>
           </div>
         </article>
+
+        <!-- Post 4 -->
+        <article class="post-card">
+          <a href="https://example.com/n4" target="_blank" rel="noopener noreferrer" class="thumb" aria-label="Nivîsa 4">
+            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=600&auto=format&fit=crop" alt="Pirtûk" loading="lazy" />
+            <span class="badge astronomy">Astronomî</span>
+          </a>
+          <div class="info">
+            <h3><a href="https://example.com/n4" target="_blank" rel="noopener noreferrer">Stêrkên Neutron: Kîjan Xwedîyê Gerdûnê ne?</a></h3>
+            <span class="date">1 Tîrmeh 2026</span>
+            <p>Stêrkên neutron ji ber giraniya xwe ya mezin, yek ji cîsmên herî ecêb ên gerdûnê ne.</p>
+          </div>
+        </article>
+
+        <!-- Post 5 -->
+        <article class="post-card">
+          <a href="https://example.com/n5" target="_blank" rel="noopener noreferrer" class="thumb" aria-label="Nivîsa 5">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636500cff5f?q=80&w=600&auto=format&fit=crop" alt="Çîp" loading="lazy" />
+            <span class="badge physics">Teknolojî</span>
+          </a>
+          <div class="info">
+            <h3><a href="https://example.com/n5" target="_blank" rel="noopener noreferrer">Komputerên Kuantûmê: Dê Cîhan Çawa Biguhere?</a></h3>
+            <span class="date">28 Hezîran 2026</span>
+            <p>Komputerên kuantûmê dikarin pirsgirêkên ku ji bo komputerên klasîk ne mimkun in çareser bikin.</p>
+          </div>
+        </article>
+
+        <!-- Post 6 -->
+        <article class="post-card">
+          <a href="https://example.com/n6" target="_blank" rel="noopener noreferrer" class="thumb" aria-label="Nivîsa 6">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=600&auto=format&fit=crop" alt="Cîhan" loading="lazy" />
+            <span class="badge astronomy">Ezman</span>
+          </a>
+          <div class="info">
+            <h3><a href="https://example.com/n6" target="_blank" rel="noopener noreferrer">Teleskopên Nû: Çavên Me Yên Di Asîmanê De</a></h3>
+            <span class="date">22 Hezîran 2026</span>
+            <p>James Webb û teleskopên din ên nû, wêneyên herî zelal ên dîroka mirovahiyê dikişînin.</p>
+          </div>
+        </article>
+
       </div>
     </section>
 
+    <!-- Categories -->
+    <section class="categories" id="kategoriyan" aria-label="Kategoriyan">
+      <div style="max-width:1200px; margin:0 auto;">
+        <p class="section-label">Kategoriyan</p>
+        <h2 style="font-family: var(--font-display); font-size: 2.2rem; margin-bottom: 2rem;">Mijarên Zanistî</h2>
+        <div class="cat-grid">
+          <a href="https://example.com/kuantum" target="_blank" rel="noopener noreferrer" class="cat-card">
+            <h4>Kuantum</h4>
+            <span>Fîzîka kuantûmê û cîhana atomî</span>
+          </a>
+          <a href="https://example.com/astronomi" target="_blank" rel="noopener noreferrer" class="cat-card">
+            <h4>Astronomî</h4>
+            <span>Stêrk, galaksî û gerdûn</span>
+          </a>
+          <a href="https://example.com/fizik" target="_blank" rel="noopener noreferrer" class="cat-card">
+            <h4>Fîzîk</h4>
+            <span>Teorî û qanûnên xwezayê</span>
+          </a>
+          <a href="https://example.com/matematik" target="_blank" rel="noopener noreferrer" class="cat-card">
+            <h4>Matematîk</h4>
+            <span>Hejmar, geometrî û teorî</span>
+          </a>
+          <a href="https://example.com/kimya" target="_blank" rel="noopener noreferrer" class="cat-card">
+            <h4>Kîmya</h4>
+            <span>Maddî, element û reaksiyon</span>
+          </a>
+          <a href="https://example.com/biyoloji" target="_blank" rel="noopener noreferrer" class="cat-card">
+            <h4>Biyolojî</h4>
+            <span>Jiyan, hucre û ekolojî</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <p>
-      <strong>Asîman</strong> — Zanist û Xwezayî <br>
-      <a href="#fizik">Fizîk</a> · <a href="#astronomi">Astronomî</a> · <a href="#biyoloji">Biyolojî</a> · <a href="#teknoloji">Teknolojî</a>
-    </p>
-    <p style="margin-top:0.5rem; opacity:0.7;">© 2026 Asîman. Hemî maf parastî ne.</p>
+  <footer id="têkildarî">
+    <div>
+      <p class="brand">Asîman <span style="color: var(--accent-cyan);">●</span></p>
+      <small>Malpera zanistî ya kurdî — 2026</small>
+    </div>
+    <div class="links">
+      <a href="#">Derbarê Me</a>
+      <a href="#">Têkildarî</a>
+      <a href="#">Nûçename</a>
+      <a href="#">Instagram</a>
+    </div>
   </footer>
 
 </body>
