@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Örgü Grupları — İplikler Arasında Kurulan Bağlar</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- MathJax 3 (LaTeX desteği) -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --kirmizi: #C73E3A;
+      --mavi: #2E5090;
+      --bej: #F5F1E8;
+      --koyu: #2D2D2D;
+      --gri: #666666;
+      --beyaz: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: linear-gradient(135deg, #fdfcfb 0%, #f5f1e8 100%);
+      color: var(--koyu);
+      font-family: 'Jost', system-ui, sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .sayfa {
+      max-width: 780px;
+      margin: 3rem auto;
+      padding: 2.5rem 3rem;
+      background: var(--beyaz);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(45,29,80,0.08), 0 8px 24px rgba(0,0,0,0.04);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Üst dekoratif çizgi */
+    .sayfa::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--kirmizi), var(--mavi));
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2.2rem;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: 600;
+      color: var(--mavi);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 0.3rem;
+    }
+
+    header .alt-baslik {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--gri);
+      margin-bottom: 0.6rem;
+    }
+
+    header .meta {
+      font-size: 0.85rem;
+      color: var(--gri);
+      letter-spacing: 0.05em;
+    }
+
+    header .meta span { margin: 0 0.4rem; color: var(--kirmizi); }
+
+    hr.bolum-cizgi {
+      border: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--mavi), var(--kirmizi), transparent);
+      margin: 1.8rem 0;
+      border-radius: 2px;
+    }
+
+    section h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      color: var(--mavi);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    section h2::before {
+      content: "●";
+      color: var(--kirmizi);
+      font-size: 1rem;
+      line-height: 0;
+    }
+
+    section h3 {
+      font-family: 'Jost', sans-serif;
+      font-size: 1.05rem;
+      color: var(--kirmizi);
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    blockquote {
+      margin: 1.2rem 1rem 1.2rem 0;
+      padding: 1rem 1.2rem;
+      border-left: 3px solid var(--kirmizi);
+      background: var(--bej);
+      border-radius: 0 8px 8px 0;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      color: var(--koyu);
+      font-style: italic;
+    }
+
+    ul, ol {
+      margin: 0.8rem 0 1.2rem 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.35rem;
+      padding-left: 0.2rem;
+    }
+
+    ul li::marker { color: var(--kirmizi); font-size: 1.1em; }
+
+    /* Formül kutusu */
+    .matematik {
+      background: #fffdf7;
+      border: 1px solid #eaddc5;
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      margin: 1.2rem 0;
+      text-align: center;
+      box-shadow: inset 0 2px 0 rgba(199,62,58,0.05);
+    }
+
+    .matematik p {
+      text-align: center;
+      margin: 0;
+      font-family: 'Jost', sans-serif;
+      color: var(--gri);
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* İki sütunlu alan */
+    .iki-sutun {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin: 1rem 0;
+    }
+
+    .iki-sutun .metin { flex: 1.4; }
+    .iki-sutun .gorsel { flex: 1; text-align: center; }
+
+    /* SVG iplik topu */
+    .yarn-svg {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.06));
+    }
+
+    /* İpucu kutusu */
+    .ipucu-kutusu {
+      background: linear-gradient(135deg, #fff8f0 0%, #fdf6e3 100%);
+      border: 1px solid #f0dcc8;
+      border-left: 5px solid var(--kirmizi);
+      border-radius: 0 10px 10px 0;
+      padding: 1.2rem 1.4rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 12px rgba(199,62,58,0.06);
+    }
+
+    .ipucu-kutusu h4 {
+      font-family: 'Jost', sans-serif;
+      color: var(--kirmizi);
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    /* Sonuç */
+    .sonuc {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 0.5rem;
+      border-top: 1px dashed #dcd6c8;
+    }
+
+    .sonuc p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem;
+      color: var(--mavi);
+      font-weight: 600;
+    }
+
+    /* Alt bilgi */
+    footer.alt-bilgi {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+
+    @media (max-width: 640px) {
+      .sayfa { margin: 1rem; padding: 1.5rem; border-radius: 8px; }
+      header h1 { font-size: 1.9rem; }
+      .iki-sutun { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sayfa">
+  <header>
+    <h1>Örgü Grupları</h1>
+    <div class="alt-baslik">İplikler Arasında Kurulan Bağlar</div>
+    <div class="meta">
+      Blog Yazısı <span>●</span> 29 Temmuz 2026 <span>●</span> Yazar: Ayşe Örücü
+    </div>
+  </header>
+
+  <hr class="bolum-cizgi">
+
+  <section>
+    <h2>Giriş</h2>
+    <p>
+      Örgü, sadece bir hobi değil; aynı zamanda bir <strong>topluluk etkinliği</strong>dir. 
+      İpliklerin dokusuyla birlikte fikirler, hikâyeler ve dostluklar da örülür. Bu yazıda, 
+      örgü gruplarının sosyal dokusunu, katılım yollarını ve bir araya gelmenin yaratıcılığa 
+      katkısını tek bir sayfada ele alacağız.
+    </p>
+
+    <blockquote>
+      “Bir ilmek tek başına bir şey ifade etmez; ama binlercesi bir araya geldiğinde bir atkı, 
+      bir hikâye, hatta bir aile olur.”
+    </blockquote>
+  </section>
+
+  <section>
+    <h2>Neden Örgü Grupları?</h2>
+    <p>
+      Örgü grupları, bireysel çalışmanın ötesine geçerek <strong>kolektif öğrenme</strong> ortamı sunar. 
+      İşte öne çıkan faydalar:
+    </p>
+    <ul>
+      <li><strong>Bilgi paylaşımı:</strong> Yeni başlayanlar, deneyimli üyelerden teknik ipuçları alır; 
+      ters ilmek veya artırma yöntemleri anında gösterilir.</li>
+      <li><strong>Motivasyon:</strong> Grup dinamiği, yarım kalan projelerin tamamlanmasını teşvik eder.</li>
+      <li><strong>Sosyal bağ:</strong> Çay eşliğinde yapılan sohbetler, yalnızca iplik değil, 
+      uzun süreli arkadaşlıklar da üretir.</li>
+    </ul>
+
+    <h3>Matematiksel Bir Bakış</h3>
+    <p>
+      Örgüde planlama yapmak için basit bir formül kullanabiliriz. Bir projenin toplam ilmek sayısı 
+      ($N$), satır sayısı ($r$) ile satır başına ilmek sayısının ($s$) çarpımına eşittir:
+    </p>
+
+    <div class="matematik">
+      <p>Toplam İlmek Sayısı</p>
+      $$ N = r \times s $$
+    </div>
+
+    <p>
+      Örneğin, $r = 120$ satır ve $s = 30$ ilmek için $N = 3600$ ilmek gerekir. 
+      Bu tür hesaplamalar, grup içinde paylaşılınca herkes için öğretici olur.
+    </p>
+  </section>
+
+  <section>
+    <h2>Gruba Nasıl Katılırım?</h2>
+    <p>Örgü topluluklarına erişim günümüzde oldukça kolay:</p>
+    <ol>
+      <li><strong>Yerel atölyeler ve kütüphaneler:</strong> Birçok belediye kültür merkezinde 
+      haftalık “örgü saatleri” düzenlenir.</li>
+      <li><strong>Çevrimiçi platformlar:</strong> Ravelry, Instagram toplulukları veya Facebook grupları 
+      sayesinde dünyanın her yerinden üyelerle bağlantı kurulabilir.</li>
+      <li><strong>Etkinlik günleri:</strong> “Yün festivalleri” veya “el işi fuarları” yeni gruplar tanımak 
+      için ideal ortamlardır.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Bir Gün Örgü Grubunda</h2>
+    <div class="iki-sutun">
+      <div class="metin">
+        <p>
+          Bir örgü grubunun tipik bir buluşması şöyle geçer: Üyeler kendi projelerini getirir, 
+          çay veya kahve eşliğinde yeni iplik renklerini tartışır. Deneyimli biri yeni bir teknik — 
+          örneğin <strong>ajurlu örgü</strong> (lace knitting) — gösterir. Herkes kendi hızında çalışır; 
+          hata yapılınca grup birlikte düzeltir.
+        </p>
+      </div>
+      <div class="gorsel">
+        <!-- Basit SVG iplik topu -->
+        <svg class="yarn-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="İplik topu">
+          <defs>
+            <filter id="gölge" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000000" flood-opacity="0.08"/>
+            </filter>
+          </defs>
+          <circle cx="60" cy="60" r="42" fill="#C73E3A" opacity="0.92" filter="url(#gölge)" />
+          <circle cx="60" cy="60" r="30" fill="none" stroke="#A02C26" stroke-width="2.5" />
+          <circle cx="60" cy="60" r="16" fill="none" stroke="#A02C26" stroke-width="2" />
+          <circle cx="60" cy="60" r="5" fill="#F5F1E8" />
+          <!-- Şiş çizgileri -->
+          <line x1="28" y1="32" x2="92" y2="88" stroke="#2E5090" stroke-width="3" stroke-linecap="round" />
+          <line x1="32" y1="42" x2="88" y2="92" stroke="#2E5090" stroke-width="2.5" stroke-linecap="round" />
+          <!-- Etiket -->
+          <rect x="25" y="98" width="70" height="14" rx="3" fill="#2E5090" />
+          <text x="60" y="109" text-anchor="middle" fill="#fff" font-size="7" font-family="Jost, sans-serif">Örgü Grubu</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <aside class="ipucu-kutusu">
+    <h4>Başlangıç İpucu</h4>
+    <p>
+      Gruba katılmadan önce basit bir başlangıç projesi seçin — örneğin düz bir <strong>atkı</strong> 
+      veya <strong>basit bere</strong>. Karmaşık desenlere (örneğin kablo örgüsü — cable knit) 
+      grup desteğiyle daha kolay geçebilirsiniz. Unutmayın: Örgü sabır işidir; grup ise bu sabrı 
+      paylaşmanın en güzel yoludur.
+    </p>
+  </aside>
+
+  <section>
+    <h2>Sonuç</h2>
+    <p>
+      Örgü grupları, <strong>yaratıcılığı</strong>, <strong>öğrenmeyi</strong> ve <strong>dostluğu</strong> 
+      tek bir çerçevede birleştirir. İster çevrimiçi ister yüz yüze olsun, bu topluluklar herkes için 
+      açık bir kapıdır. Eğer elinizde bir şiş ve bir yumak iplik varsa, bir gruba katılmanın tam zamanıdır.
+    </p>
+  </section>
+
+  <div class="sonuc">
+    <p>İplikleriniz bol, ilmekleriniz sıkı olsun!</p>
+  </div>
+
+  <footer class="alt-bilgi">
+    Bu blog yazısı tek sayfalık bir HTML dokümanı olarak hazırlanmıştır. • MathJax ile LaTeX desteği sağlanmıştır.
+  </footer>
+</div>
+
+</body>
+</html>
